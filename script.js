@@ -16,6 +16,17 @@ const changeDisplayValue = (input) => {
     displayValue.textContent === "0" ? (displayValue.textContent = input) : (displayValue.textContent += input)
 }
 
+const deleteButton = document.querySelector('.Delete')
+  deleteButton.onclick = () => {
+    deleteLastDigit();
+  }
+
+const decimalButton = document.querySelector('.decimal')
+decimalButton.onclick = () => {
+    if (displayValue.textContent.includes('.')) {
+        alert('Error: decimal point already selected')
+    } else {displayValue.textContent += "."}
+  }
 
 const clearButton = document.querySelector('.Clear')
 clearButton.onclick = () => {
@@ -30,9 +41,4 @@ numButtons.forEach((button) => {
     });
   });
 
-
-  const deleteButton = document.querySelector('.Delete')
-  deleteButton.onclick = () => {
-    deleteLastDigit();
-  }
 

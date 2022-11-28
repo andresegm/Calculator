@@ -81,7 +81,7 @@ Container {
     border-bottom-right-radius: 10px;
 }
 
-.button.num {
+.num {
     font-size: larger;
     justify-content: center;
     align-items: center;
