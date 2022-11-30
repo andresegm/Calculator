@@ -3,7 +3,8 @@ const add = (num1, num2) => num1 + num2;
 const multiply = (num1, num2) => num1 * num2;
 const divide = (num1, num2) => {
   if (parseFloat(num2) === 0) {
-    alert ('error: cannot divide by 0')
+    alert ('error: cannot divide by 0');
+    clearFields()
   } else {
     return num1/num2
   }
@@ -43,12 +44,15 @@ const operate = (operator, num1, num2) => {
         num2 = parseFloat(workingValueArray1.join(''))
         result = operator(num1, num2)
     }
-  
-  displayValue.textContent = result;
+  if (result) {
+    displayValue.textContent = result;
+    workingValueArray1 = String(result).split('')
+  } else{
+    displayValue.textContent = 0;
+  }
   clearArray(workingValueArray1)
   clearArray(workingValueArray2)
   clearArray(operatorArray)
-  workingValueArray1 = String(result).split('')
   console.log(`the result is ${result}`)
 }
 
