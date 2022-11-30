@@ -1,7 +1,13 @@
 const substract = (num1, num2) => num1 - num2;
 const add = (num1, num2) => num1 + num2;
 const multiply = (num1, num2) => num1 * num2;
-const divide = (num1, num2) => num1 / num2;
+const divide = (num1, num2) => {
+  if (parseFloat(num2) === 0) {
+    alert ('error: cannot divide by 0')
+  } else {
+    return num1/num2
+  }
+}
 
 const displayValue = document.querySelector('.Display');
 let workingValueArray1 = []
@@ -14,26 +20,26 @@ const operate = (operator, num1, num2) => {
     (operatorArray[operatorArray.length -1] === '+') 
     {
       operator = add
-      num1 = parseInt(workingValueArray2.join(''))
-      num2 = parseInt(workingValueArray1.join(''))
+      num1 = parseFloat(workingValueArray2.join(''))
+      num2 = parseFloat(workingValueArray1.join(''))
       result = operator(num1, num2)
     } else if 
     (operatorArray[operatorArray.length -1] === '-') {
       operator = substract
-      num1 = parseInt(workingValueArray2.join(''))
-      num2 = parseInt(workingValueArray1.join(''))
+      num1 = parseFloat(workingValueArray2.join(''))
+      num2 = parseFloat(workingValueArray1.join(''))
       result = operator(num1, num2)
     } else if 
     (operatorArray[operatorArray.length -1] === 'x') {
         operator = multiply
-        num1 = parseInt(workingValueArray2.join(''))
-        num2 = parseInt(workingValueArray1.join(''))
+        num1 = parseFloat(workingValueArray2.join(''))
+        num2 = parseFloat(workingValueArray1.join(''))
         result = operator(num1, num2)
     } else if 
     (operatorArray[operatorArray.length -1] === '÷') {
         operator = divide
-        num1 = parseInt(workingValueArray2.join(''))
-        num2 = parseInt(workingValueArray1.join(''))
+        num1 = parseFloat(workingValueArray2.join(''))
+        num2 = parseFloat(workingValueArray1.join(''))
         result = operator(num1, num2)
     }
   
@@ -41,7 +47,7 @@ const operate = (operator, num1, num2) => {
   clearArray(workingValueArray1)
   clearArray(workingValueArray2)
   clearArray(operatorArray)
-  workingValueArray2.push(result)
+  workingValueArray1 = String(result).split('')
   console.log(`the result is ${result}`)
 }
 
@@ -57,7 +63,14 @@ const clearFields = () => {
 
 const deleteLastDigit = () => {
     displayValue.textContent = displayValue.textContent.slice(0, -1)
+    workingValueArray1.pop()
+    console.log(`working value is ${workingValueArray1.join('')}`)
 }
+
+const deleteButton = document.querySelector('.Delete')
+  deleteButton.onclick = () => {
+    deleteLastDigit();
+  }
 
 const changeDisplayValue = (input) => {
     displayValue.textContent === "0" ? (displayValue.textContent = input) : (displayValue.textContent += input)
@@ -85,7 +98,7 @@ numButtons.forEach((button) => {
     button.addEventListener('click', () => {
       changeDisplayValue(button.textContent)
       changeWorkingValueArray1(button.textContent)
-      console.log(`workingValueArray1 is ${workingValueArray1.join('')}`)
+      console.log(`working value is ${workingValueArray1.join('')}`)
     });
   });
 
@@ -93,40 +106,32 @@ numButtons.forEach((button) => {
 const operatorButtons = document.querySelectorAll('.button.operator')
 operatorButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        displayValue.textContent = '';
+        if (operatorArray.length > 0) {
+          clearFields()
+          alert('Error: cannot call operators back-to-back')
+        } else {
+        displayValue.textContent = 0;
         changeOperatorArray(button.textContent)
         for (let i of workingValueArray1) {
           workingValueArray2.push(i)
         }
         clearArray(workingValueArray1)
-        console.log(`operator array is ${operatorArray}`);
-        console.log(`workingValueArray2 is (2nd) ${workingValueArray2.join('')}`);
+        console.log(`operator called is ${operatorArray}`);
+        console.log(`stored value is ${workingValueArray2.join('')}`);
+      }
     });
   });
 
 const equalsButton = document.querySelector('.equals')
-equalsButton.onclick = () => {
+  equalsButton.onclick = () => {
   operate()
 }
-
-
-
-
-/*
-const deleteButton = document.querySelector('.Delete')
-  deleteButton.onclick = () => {
-    deleteLastDigit();
-  }
-
 
 const decimalButton = document.querySelector('.decimal')
 decimalButton.onclick = () => {
     if (displayValue.textContent.includes('.')) {
         alert('Error: decimal point already selected')
     } else {
-      changeWorkingValueArray2('.')
-      workingValue= workingValueArray2.join('')
-      console.log(`working value is ${workingValue}`)
+      changeWorkingValueArray1('.')
       displayValue.textContent += "."}
   }
-*/
