@@ -3,13 +3,48 @@ const add = (num1, num2) => num1 + num2;
 const multiply = (num1, num2) => num1 * num2;
 const divide = (num1, num2) => num1 / num2;
 
-const operate = (operator, num1, num2) => operator(num1, num2);
-
 const displayValue = document.querySelector('.Display');
-
 let workingValueArray1 = []
 let workingValueArray2 = []
 let operatorArray = []
+
+const operate = (operator, num1, num2) => {
+  let result = ""
+  if 
+    (operatorArray[operatorArray.length -1] === '+') 
+    {
+      operator = add
+      num1 = parseInt(workingValueArray2.join(''))
+      num2 = parseInt(workingValueArray1.join(''))
+      result = operator(num1, num2)
+    } else if 
+    (operatorArray[operatorArray.length -1] === '-') {
+      operator = substract
+      num1 = parseInt(workingValueArray2.join(''))
+      num2 = parseInt(workingValueArray1.join(''))
+      result = operator(num1, num2)
+    } else if 
+    (operatorArray[operatorArray.length -1] === 'x') {
+        operator = multiply
+        num1 = parseInt(workingValueArray2.join(''))
+        num2 = parseInt(workingValueArray1.join(''))
+        result = operator(num1, num2)
+    } else if 
+    (operatorArray[operatorArray.length -1] === '÷') {
+        operator = divide
+        num1 = parseInt(workingValueArray2.join(''))
+        num2 = parseInt(workingValueArray1.join(''))
+        result = operator(num1, num2)
+    }
+  
+  displayValue.textContent = result;
+  clearArray(workingValueArray1)
+  clearArray(workingValueArray2)
+  clearArray(operatorArray)
+  workingValueArray2.push(result)
+  console.log(`the result is ${result}`)
+}
+
 
 const clearArray = (arr) => arr.length = 0;
 
@@ -58,7 +93,7 @@ numButtons.forEach((button) => {
 const operatorButtons = document.querySelectorAll('.button.operator')
 operatorButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        displayValue.textContent = 0;
+        displayValue.textContent = '';
         changeOperatorArray(button.textContent)
         for (let i of workingValueArray1) {
           workingValueArray2.push(i)
@@ -71,18 +106,7 @@ operatorButtons.forEach((button) => {
 
 const equalsButton = document.querySelector('.equals')
 equalsButton.onclick = () => {
-    let result = ""
-    if (operatorArray[operatorArray.length -1] === '+') {
-      console.log(`workingValue1 is ${workingValueArray1.join('')}`)
-      console.log(`workingValue2 is ${workingValueArray2.join('')}`)
-      result = operate(add, parseInt(workingValueArray2.join('')), parseInt(workingValueArray1.join('')))
-    }
-    displayValue.textContent = result;
-    clearArray(workingValueArray1)
-    clearArray(workingValueArray2)
-    clearArray(operatorArray)
-    workingValueArray2.push(result)
-    console.log(`the result is ${result}`)
+  operate()
 }
 
 
