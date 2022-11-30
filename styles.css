@@ -91,7 +91,7 @@ Container {
     background-color: rgb(250, 246, 246);
 }
 
-.button.operator {
+.button.operator, .equals {
     font-size: larger;
     justify-content: center;
     align-items: center;
