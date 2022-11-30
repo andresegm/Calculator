@@ -9,6 +9,7 @@ const divide = (num1, num2) => {
   }
 }
 
+
 const displayValue = document.querySelector('.Display');
 let workingValueArray1 = []
 let workingValueArray2 = []
