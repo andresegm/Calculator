@@ -123,10 +123,9 @@ numButtons.forEach((button) => {
 const operatorButtons = document.querySelectorAll('.button.operator')
 operatorButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        if (operatorArray.length > 0) {
-          clearFields()
-          alert('Error: cannot call operators back-to-back')
-        } else {
+      if (workingValueArray1.length > 0 && workingValueArray2.length > 0 && operatorArray.length > 0) {
+        operate(0)
+      }
         changeOperatorArray(button.textContent)
         for (let i of workingValueArray1) {
           workingValueArray2.push(i)
@@ -134,7 +133,6 @@ operatorButtons.forEach((button) => {
         clearArray(workingValueArray1)
         console.log(`operator called is ${operatorArray}`);
         console.log(`stored value is ${workingValueArray2.join('')}`);
-      }
     });
   });
 
@@ -151,5 +149,3 @@ decimalButton.onclick = () => {
       changeWorkingValueArray1('.')
       displayValue.textContent += "."}
   }
-
-//need to be able to call operators back to back 
