@@ -14,7 +14,6 @@ const divide = (num1, num2) => {
 const displayValue = document.querySelector('.Display');
 
 
-
 let workingValueArray1 = []
 let workingValueArray2 = []
 let operatorArray = []
@@ -83,8 +82,7 @@ const deleteButton = document.querySelector('.Delete')
     deleteLastDigit();
   }
 
-const changeDisplayValue = (input) => {
-    displayValue.textContent === "0" ? (displayValue.textContent = input) : (displayValue.textContent += input);
+const changeDisplaySize = () => {
     if (displayValue.textContent.length < 15) {
       displayValue.style.fontSize = "4vw"
     } else if (displayValue.textContent.length > 15 && displayValue.textContent.length < 30) {
@@ -114,8 +112,9 @@ clearButton.onclick = () => {
 const numButtons = document.querySelectorAll('.button.num')
 numButtons.forEach((button) => {
     button.addEventListener('click', () => {
-      changeDisplayValue(button.textContent)
       changeWorkingValueArray1(button.textContent)
+      displayValue.textContent = workingValueArray1.join("")
+      changeDisplaySize();
       console.log(`working value is ${workingValueArray1.join('')}`)
     });
   });
@@ -128,7 +127,6 @@ operatorButtons.forEach((button) => {
           clearFields()
           alert('Error: cannot call operators back-to-back')
         } else {
-        displayValue.textContent = 0;
         changeOperatorArray(button.textContent)
         for (let i of workingValueArray1) {
           workingValueArray2.push(i)
@@ -154,3 +152,4 @@ decimalButton.onclick = () => {
       displayValue.textContent += "."}
   }
 
+//need to be able to call operators back to back 
