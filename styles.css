@@ -22,6 +22,7 @@ Container {
 
 .Display {
     display: flex;
+    flex: 1 0 auto;
     border: 2px solid rgb(187, 183, 183);
     height: 60px;
     width: 80%;
@@ -30,7 +31,8 @@ Container {
     margin-right: 10%;
     align-items:flex-end;
     justify-content: flex-end;
-    font-size: 4vw
+    font-size: 4vw;
+    overflow:auto;
   
 }
 
