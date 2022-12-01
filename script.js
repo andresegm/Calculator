@@ -44,16 +44,19 @@ const operate = (operator, num1, num2) => {
         num2 = parseFloat(workingValueArray1.join(''))
         result = operator(num1, num2)
     }
-  if (result) {
-    displayValue.textContent = result;
-    workingValueArray1 = String(result).split('')
-  } else{
-    displayValue.textContent = 0;
-  }
+
   clearArray(workingValueArray1)
   clearArray(workingValueArray2)
   clearArray(operatorArray)
-  console.log(`the result is ${result}`)
+
+  if (result) {
+    displayValue.textContent = result;
+    workingValueArray1 = String(result).split('')
+    console.log(`the result is ${result}`)
+  } else{
+    displayValue.textContent = 0;
+  }
+  
 }
 
 
