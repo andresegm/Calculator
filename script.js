@@ -12,6 +12,9 @@ const divide = (num1, num2) => {
 
 
 const displayValue = document.querySelector('.Display');
+
+
+
 let workingValueArray1 = []
 let workingValueArray2 = []
 let operatorArray = []
@@ -81,7 +84,14 @@ const deleteButton = document.querySelector('.Delete')
   }
 
 const changeDisplayValue = (input) => {
-    displayValue.textContent === "0" ? (displayValue.textContent = input) : (displayValue.textContent += input)
+    displayValue.textContent === "0" ? (displayValue.textContent = input) : (displayValue.textContent += input);
+    if (displayValue.textContent.length < 15) {
+      displayValue.style.fontSize = "4vw"
+    } else if (displayValue.textContent.length > 15 && displayValue.textContent.length < 30) {
+      displayValue.style.fontSize = "2vw"
+    } else if (displayValue.textContent.length > 30) {
+      displayValue.style.fontSize = "1vw"
+    }
 }
 
 const changeWorkingValueArray1 = (input) => {
